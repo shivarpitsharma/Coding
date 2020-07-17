@@ -2,6 +2,7 @@ package com.myapplication
 
 import android.util.Log
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 import kotlin.math.pow
@@ -35,11 +36,11 @@ object Solutions {
      */
 
     fun removeElement(nums: IntArray, `val`: Int): Int {
-        var arr_length = nums.size
+        var arrlength = nums.size
         var i = 0
         var j = 0
 
-        while (j < arr_length) {
+        while (j < arrlength) {
             if (nums[j] != `val`) {
                 nums[i] = nums[j]
                 i++
@@ -434,17 +435,104 @@ object Solutions {
      * it would be if it were inserted in order.
      */
 
-    fun searchInsert(nums: IntArray, target: Int): Int {
-        for (i in nums.indices) {
+    fun searchInsert(target: Int): Int {
+        val intArray = IntArray(4)
+        intArray[0]=1
+        intArray[1]=3
+        intArray[2]=5
+        intArray[3]=6
+        for (i in intArray.indices) {
             when {
-                nums[i] == target -> return i
-                i < nums.size - 1 && nums[i] < target && nums[i + 1] > target || i == nums.size - 1 && nums[i] < target -> return i + 1
-                i == 0 && nums[i] > target -> return 0
+                intArray[i] == target -> return i
+                i < intArray.size - 1 && intArray[i] < target && intArray[i + 1] > target || i == intArray.size - 1 && intArray[i] < target -> return i + 1
+                i == 0 && intArray[i] > target -> return 0
             }
         }
         return 0
     }
 
+    /**
+     * Given a string s consists of upper/lower-case alphabets and empty space characters ' ',
+     * return the length of last word (last word means the last appearing word if we loop from left to right)
+     * in the string.
+     * If the last word does not exist, return 0.
+     * Note: A word is defined as a maximal substring consisting of non-space characters only.
+     *
+     * eg : Input: "Hello World"
+     *      Output: 5
+     */
 
+    fun lengthOfLastWord(s: String): Int {
+        return 0
+    }
+
+    /**
+     * Array of 1-10 ,
+     * print fizzbuzz if array element is divisible by both 3 and 5
+     * print fizz if array element is divisible by 3
+     * print buzz if array element is divisible by 5
+     * print number if it is neither divisible by 5 nor 3
+     */
+
+    fun printAccordingToDivisibility(): String {
+        val array = IntArray(10)
+        array[0] = 1
+        array[1] = 2
+        array[2] = 3
+        array[3] = 4
+        array[4] = 5
+        array[5] = 6
+        array[6] = 7
+        array[7] = 8
+        array[8] = 9
+        array[9] = 10
+
+        for (i in array) {
+            return when {
+                i % 3 == 0 && i % 5 == 0 -> "fizzbuzz"
+                i % 3 == 0 -> "fizz"
+                i % 5 == 0 -> "buzz"
+                else -> i.toString()
+            }
+        }
+        return ""
+    }
+
+    /**
+     * Given two arrays,
+     * write a function to compute their intersection.
+     *
+     * eg: Input: nums1 = [1,2,2,1], nums2 = [2,2]
+     *     Output: [2]
+     *
+     *     Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     *     Output: [9,4]
+     */
+
+    fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
+        return if(nums1.size>nums2.size){
+            returnIntersection(nums1,nums2)
+        }else {
+            returnIntersection(nums2,nums1)
+        }
+    }
+
+    private fun returnIntersection(largerArray: IntArray, smallerArray: IntArray):IntArray{
+        val hashmap = HashMap<Int,Boolean>()
+        val returningArray = ArrayList<Int>()
+        for(item in largerArray){
+            if(!hashmap.containsKey(item)){
+                hashmap[item] = true
+            }
+        }
+
+        for (item in smallerArray){
+            if(hashmap.containsKey(item) && !returningArray.contains(item)){
+                returningArray.add(item)
+            }
+        }
+
+        return returningArray.toIntArray()
+    }
 
 }

@@ -2,11 +2,14 @@ package com.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.myapplication.Solutions.callByRefOrValue
 import com.myapplication.Solutions.getIntArray
 import com.myapplication.Solutions.getList1NodeOne
 import com.myapplication.Solutions.getList2NodeOne
+import com.myapplication.Solutions.lengthOfLastWord
 import com.myapplication.Solutions.longestCommonPrefix
 import com.myapplication.Solutions.mergeTwoLists
+import com.myapplication.Solutions.printAccordingToDivisibility
 import com.myapplication.Solutions.removeDuplicates
 import com.myapplication.Solutions.reverseInteger
 import com.myapplication.Solutions.romanToInt
@@ -25,12 +28,12 @@ class MainActivity : AppCompatActivity() {
 //        result = Solutions.isValid("{[]}").toString()
 //        result = mergeTwoLists(getList1NodeOne(),getList2NodeOne()).toString()
 //        result = removeDuplicates(getIntArray()).toString()
-        val intArray = IntArray(4)
-        intArray[0]=1
-        intArray[1]=3
-        intArray[2]=5
-        intArray[3]=6
-        result = searchInsert(intArray,5).toString()
-        result_tv.text = result
+//        result = searchInsert(5).toString()
+//        result = lengthOfLastWord("Hello World").toString()
+//        result = printAccordingToDivisibility()
+//        callByRefOrValue(arrayOf(1,2,3,4,5))
+        val solution = solutionJava()
+        solution.callByValueOrRef()
+//        result_tv.text = result
     }
 }

@@ -2,7 +2,6 @@ package com.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.myapplication.Solutions.callByRefOrValue
 import com.myapplication.Solutions.getIntArray
 import com.myapplication.Solutions.getList1NodeOne
 import com.myapplication.Solutions.getList2NodeOne
@@ -32,8 +31,12 @@ class MainActivity : AppCompatActivity() {
 //        result = lengthOfLastWord("Hello World").toString()
 //        result = printAccordingToDivisibility()
 //        callByRefOrValue(arrayOf(1,2,3,4,5))
-        val solution = solutionJava()
-        solution.callByValueOrRef()
-//        result_tv.text = result
+//        val solution = solutionJava()
+//        solution.callByValueOrRef()
+//        result = Solutions.isValidName().toString()
+//        result = Solutions.checkFloatConversion().toString()
+        result = MoreSolutions.findEquiInOofN().toString()
+//         MoreSolutions.getMaxSum()
+        result_tv.text = result
     }
 }

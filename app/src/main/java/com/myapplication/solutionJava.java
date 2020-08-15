@@ -24,5 +24,6 @@ class solutionJava {
             array[i]=array[i]*2;
         }
     }
+
 }
 

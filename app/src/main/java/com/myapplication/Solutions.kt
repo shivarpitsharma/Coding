@@ -2,6 +2,7 @@ package com.myapplication
 
 import android.util.Log
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
@@ -533,6 +534,21 @@ object Solutions {
         }
 
         return returningArray.toIntArray()
+    }
+
+    /**
+     * Pattern matcher for special character
+     */
+
+    fun isValidName():Boolean{
+        val string = "UP14BD7717"
+        return Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*",string)
+    }
+
+
+    fun checkFloatConversion():Float{
+        val number = 145678
+        return number.div(1000.0).toFloat()
     }
 
 }

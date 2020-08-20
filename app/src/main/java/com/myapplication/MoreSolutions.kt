@@ -7,6 +7,12 @@ import android.util.Log
  */
 object MoreSolutions {
 
+    /**
+     * Find equilibrium index of array
+     * i.e : sum of elements on left of that index is equal to
+     * sum of element on right of that index.
+     * in O(n)
+     */
     fun findEquiInOofN(): Int {
         val array = arrayOf(-8, 3, 4, -9, 2, -5)
         var sum = 0
@@ -25,6 +31,13 @@ object MoreSolutions {
         }
         return -1
     }
+
+    /**
+     * Find equilibrium index of array
+     * i.e : sum of elements on left of that index is equal to
+     * sum of element on right of that index.
+     * in O(n)
+     */
 
     fun findEquiBadApproach() {
         val array = arrayOf(-8, 3, 4, -9, 2, -5)

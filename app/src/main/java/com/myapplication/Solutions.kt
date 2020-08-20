@@ -1,6 +1,5 @@
 package com.myapplication
 
-import android.util.Log
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
@@ -188,7 +187,7 @@ object Solutions {
 
     fun isPalindrome(x: Int): Boolean {
 
-        if(x<0){
+        if (x < 0) {
             return false
         }
         // used reversing method made in previous question
@@ -212,8 +211,8 @@ object Solutions {
 
     fun romanToInt(s: String): Int {
 
-        fun getRomanValue(s:String):Int{
-            return when(s){
+        fun getRomanValue(s: String): Int {
+            return when (s) {
                 "I" -> 1
                 "V" -> 5
                 "X" -> 10
@@ -224,17 +223,19 @@ object Solutions {
                 else -> 0
             }
         }
+
         val romanArray = s.toCharArray()
         var result = 0
         for (i in romanArray.indices) {
-                result += if (i < romanArray.size - 1
-                    && getRomanValue(romanArray[i].toString()) < getRomanValue(romanArray[i+1].toString())) {
-                    val sumValue = getRomanValue(romanArray[i].toString()).times(-1)
-                    sumValue
-                } else {
-                    getRomanValue(romanArray[i].toString())
-                }
+            result += if (i < romanArray.size - 1
+                && getRomanValue(romanArray[i].toString()) < getRomanValue(romanArray[i + 1].toString())
+            ) {
+                val sumValue = getRomanValue(romanArray[i].toString()).times(-1)
+                sumValue
+            } else {
+                getRomanValue(romanArray[i].toString())
             }
+        }
         return result
     }
 
@@ -247,31 +248,32 @@ object Solutions {
 
     fun longestCommonPrefix(strs: Array<String>): String {
         var commonPrefixString = ""
-        if(strs.size == 1){
+        if (strs.size == 1) {
             commonPrefixString = strs[0]
-        } else if(strs.size > 1) {
-            var isfirsttwofailed=false
-            for(i in strs.indices){
-                if(i< strs.size-1) {
-                    if(isfirsttwofailed && commonPrefixString.isEmpty()){
+        } else if (strs.size > 1) {
+            var isfirsttwofailed = false
+            for (i in strs.indices) {
+                if (i < strs.size - 1) {
+                    if (isfirsttwofailed && commonPrefixString.isEmpty()) {
                         return ""
                     } else {
-                        if(isfirsttwofailed && commonPrefixString.isNotEmpty()){
-                            val thirdStringCharArray = strs[i+1].toCharArray()
+                        if (isfirsttwofailed && commonPrefixString.isNotEmpty()) {
+                            val thirdStringCharArray = strs[i + 1].toCharArray()
                             val commonPrefixArray = commonPrefixString.toCharArray()
-                            val length = minOf(thirdStringCharArray.size,commonPrefixArray.size)
-                            var k=0
+                            val length = minOf(thirdStringCharArray.size, commonPrefixArray.size)
+                            var k = 0
                             commonPrefixString = ""
-                            while (k<length && commonPrefixArray[k] == thirdStringCharArray[k]){
+                            while (k < length && commonPrefixArray[k] == thirdStringCharArray[k]) {
                                 commonPrefixString += commonPrefixArray[k].toString()
                                 k++
                             }
                         } else {
                             val firstStringCharArray = strs[i].toCharArray()
-                            val secondStringCharArray = strs[i+1].toCharArray()
-                            val length = minOf(firstStringCharArray.size,secondStringCharArray.size)
+                            val secondStringCharArray = strs[i + 1].toCharArray()
+                            val length =
+                                minOf(firstStringCharArray.size, secondStringCharArray.size)
                             var j = 0
-                            while(j<length && firstStringCharArray[j] == secondStringCharArray[j]) {
+                            while (j < length && firstStringCharArray[j] == secondStringCharArray[j]) {
                                 commonPrefixString += firstStringCharArray[j].toString()
                                 j++
                             }
@@ -306,14 +308,14 @@ object Solutions {
      */
 
     fun isValid(s: String): Boolean {
-        val parenthesesStack : Stack<String> = Stack()
+        val parenthesesStack: Stack<String> = Stack()
         val stringArray = s.toCharArray()
-        for (i in stringArray.indices){
-            if(parenthesesStack.isEmpty()){
+        for (i in stringArray.indices) {
+            if (parenthesesStack.isEmpty()) {
                 parenthesesStack.push(stringArray[i].toString())
-            }else {
-                if(stringArray[i].toString() == ")" || stringArray[i].toString() == "]" || stringArray[i].toString() == "}") {
-                    if(isValidLeft(stringArray[i].toString(),parenthesesStack.peek())){
+            } else {
+                if (stringArray[i].toString() == ")" || stringArray[i].toString() == "]" || stringArray[i].toString() == "}") {
+                    if (isValidLeft(stringArray[i].toString(), parenthesesStack.peek())) {
                         parenthesesStack.pop()
                     } else {
                         parenthesesStack.push(stringArray[i].toString())
@@ -326,8 +328,8 @@ object Solutions {
         return parenthesesStack.isEmpty()
     }
 
-    private fun isValidLeft(rightParen : String, topOfStack:String) : Boolean{
-        return when(rightParen){
+    private fun isValidLeft(rightParen: String, topOfStack: String): Boolean {
+        return when (rightParen) {
             ")" -> topOfStack == "("
             "]" -> topOfStack == "["
             "}" -> topOfStack == "{"
@@ -343,10 +345,10 @@ object Solutions {
      */
 
     class ListNode(var `val`: Int) {
-             var next: ListNode? = null
-         }
+        var next: ListNode? = null
+    }
 
-    fun getList1NodeOne():ListNode?{
+    fun getList1NodeOne(): ListNode? {
         val list1Node1 = ListNode(1)
         val list1Node2 = ListNode(2)
         val list1Node3 = ListNode(4)
@@ -354,7 +356,8 @@ object Solutions {
         list1Node2.next = list1Node3
         return list1Node1
     }
-    fun getList2NodeOne():ListNode?{
+
+    fun getList2NodeOne(): ListNode? {
         val list2Node1 = ListNode(1)
         val list2Node2 = ListNode(3)
         val list2Node3 = ListNode(4)
@@ -369,21 +372,21 @@ object Solutions {
         val l3 = ListNode(0)
         var ptr = l3
 
-        while(true){
-            if(listOneNode == null && listTwoNode == null){
+        while (true) {
+            if (listOneNode == null && listTwoNode == null) {
                 break
-            } else if(listOneNode == null){
+            } else if (listOneNode == null) {
                 ptr.next = listTwoNode
                 break
-            } else if (listTwoNode == null){
+            } else if (listTwoNode == null) {
                 ptr.next = listOneNode
                 break
             } else {
                 var smallerValue = 0
-                if(listOneNode.`val` < listTwoNode.`val`){
+                if (listOneNode.`val` < listTwoNode.`val`) {
                     smallerValue = listOneNode.`val`
                     listOneNode = listOneNode.next
-                }else {
+                } else {
                     smallerValue = listTwoNode.`val`
                     listTwoNode = listTwoNode.next
                 }
@@ -410,20 +413,21 @@ object Solutions {
      *      It doesn't matter what you leave beyond the returned length.
      */
 
-    fun getIntArray():IntArray{
+    fun getIntArray(): IntArray {
         val intArray = IntArray(5)
-        intArray[0]=1
-        intArray[1]=1
-        intArray[2]=1
-        intArray[3]=2
-        intArray[4]=3
+        intArray[0] = 1
+        intArray[1] = 1
+        intArray[2] = 1
+        intArray[3] = 2
+        intArray[4] = 3
         return intArray
     }
+
     fun removeDuplicates(nums: IntArray): IntArray {
         var count = 1
-        for(i in nums.indices){
-            if(i<nums.size-1 && nums[i]!=nums[i+1]){
-                nums[count++] = nums[i+1]
+        for (i in nums.indices) {
+            if (i < nums.size - 1 && nums[i] != nums[i + 1]) {
+                nums[count++] = nums[i + 1]
             }
         }
         return nums
@@ -438,10 +442,10 @@ object Solutions {
 
     fun searchInsert(target: Int): Int {
         val intArray = IntArray(4)
-        intArray[0]=1
-        intArray[1]=3
-        intArray[2]=5
-        intArray[3]=6
+        intArray[0] = 1
+        intArray[1] = 3
+        intArray[2] = 5
+        intArray[3] = 6
         for (i in intArray.indices) {
             when {
                 intArray[i] == target -> return i
@@ -511,24 +515,24 @@ object Solutions {
      */
 
     fun intersection(nums1: IntArray, nums2: IntArray): IntArray {
-        return if(nums1.size>nums2.size){
-            returnIntersection(nums1,nums2)
-        }else {
-            returnIntersection(nums2,nums1)
+        return if (nums1.size > nums2.size) {
+            returnIntersection(nums1, nums2)
+        } else {
+            returnIntersection(nums2, nums1)
         }
     }
 
-    private fun returnIntersection(largerArray: IntArray, smallerArray: IntArray):IntArray{
-        val hashmap = HashMap<Int,Boolean>()
+    private fun returnIntersection(largerArray: IntArray, smallerArray: IntArray): IntArray {
+        val hashmap = HashMap<Int, Boolean>()
         val returningArray = ArrayList<Int>()
-        for(item in largerArray){
-            if(!hashmap.containsKey(item)){
+        for (item in largerArray) {
+            if (!hashmap.containsKey(item)) {
                 hashmap[item] = true
             }
         }
 
-        for (item in smallerArray){
-            if(hashmap.containsKey(item) && !returningArray.contains(item)){
+        for (item in smallerArray) {
+            if (hashmap.containsKey(item) && !returningArray.contains(item)) {
                 returningArray.add(item)
             }
         }
@@ -540,15 +544,9 @@ object Solutions {
      * Pattern matcher for special character
      */
 
-    fun isValidName():Boolean{
+    fun isValidName(): Boolean {
         val string = "UP14BD7717"
-        return Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*",string)
-    }
-
-
-    fun checkFloatConversion():Float{
-        val number = 145678
-        return number.div(1000.0).toFloat()
+        return Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*", string)
     }
 
 }

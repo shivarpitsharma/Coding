@@ -71,6 +71,9 @@ object MoreSolutions {
         return -8
     }
 
+    /**
+     * get maximum sum of pairs of elements in the array having the same digit sum
+     */
 
     fun getMaxSum() {
         val array = arrayOf(55, 23, 32, 46, 88)
@@ -96,5 +99,33 @@ object MoreSolutions {
         Log.i("result", max.toString())
     }
 
+    /**
+     *
+     * Find needle in a haystack
+     * ie: Return the index of the first occurrence of needle in haystack,
+     * or -1 if needle is not part of haystack.
+     */
+
+    fun findNeedleInHaystack(needle: String, hayStack: String): Int {
+        val j = 0
+        if (needle.isBlank()) {
+            return 0
+        }
+        if (needle.length > hayStack.length) {
+            return -1
+        }
+        for (i in hayStack.indices) {
+            val hayStackChar = hayStack.toCharArray()[i]
+            val needleChar = needle.toCharArray()[j]
+
+            if (hayStackChar == needleChar) {
+                val subString = hayStack.subSequence(i, i + needle.length)
+                if (subString == needle) {
+                    return i
+                }
+            }
+        }
+        return -1
+    }
 
 }

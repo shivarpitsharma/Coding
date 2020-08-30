@@ -128,4 +128,96 @@ object MoreSolutions {
         return -1
     }
 
+    /**
+     * Given a string s consists of upper/lower-case alphabets and empty space characters ' ',
+     * return the length of last word (last word means the last appearing word if we loop from left to right)
+     * in the string.
+     * If the last word does not exist, return 0.
+     * Note: A word is defined as a maximal substring consisting of non-space characters only.
+     *
+     * eg : Input: "Hello World"
+     *      Output: 5
+     *
+     *      Input: "a "
+     *      Output: 1
+     *
+     *      Input: "  day "
+     *      Output: 3
+     */
+
+    fun lengthOfLastWord(s: String): Int {
+        var len = 0
+        var found = false
+        var i: Int = s.length - 1
+        while (!found && i >= 0) {
+            if (s.toCharArray()[i] != ' ') {
+                len++
+            } else if (len != 0) {
+                found = true
+            }
+            i--
+        }
+
+        return len
+    }
+
+
+    /**
+     * Given a non-empty array of digits representing a non-negative integer, increment one to the integer.
+     * The digits are stored such that the most significant digit is at the head of the list,
+     * and each element in the array contains a single digit.
+     * You may assume the integer does not contain any leading zero,
+     * except the number 0 itself.
+     *
+     *  eg : Input: digits = [1,2,3]
+     *  Output: [1,2,4]
+     *  Explanation: The array represents the integer 123.
+     *
+     *  Input: digits = [4,3,2,1]
+     *  Output: [4,3,2,2]
+     *  Explanation: The array represents the integer 4321.
+     *
+     *  Input: digits = [0]
+     *  Output: [1]
+     */
+
+    fun plusOne(digits: IntArray): IntArray {
+        digits[digits.size - 1] += 1
+        return if (digits[digits.size - 1] > 9) {
+            var count = 1
+            for (i in digits.size - 1 downTo 0) {
+                if (count == 0) {
+                    break
+                }
+                if (digits[i] + count > 9) {
+                    digits[i] = 0
+                    count = 1
+                } else {
+                    digits[i] += count
+                    count = 0
+                }
+            }
+            if (count == 0) {
+                digits
+            } else {
+                val arrayOut = IntArray(digits.size + 1)
+                for (i in arrayOut.indices) {
+                    if (i == 0) {
+                        arrayOut[i] = 1
+                    } else {
+                        arrayOut[i] = 0
+                    }
+                }
+                arrayOut
+            }
+
+        } else {
+            digits
+        }
+    }
+
+//    private infix fun Int.exp(exponent: Int): Int = toDouble().pow(exponent).toInt()
+
+
 }
+

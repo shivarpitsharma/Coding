@@ -2,6 +2,7 @@ package com.myapplication
 
 import android.util.Log
 import android.widget.Toast
+import java.util.*
 
 /**
  * Created by Shivarpit
@@ -15,7 +16,7 @@ object MoreSolutions {
      * in O(n)
      */
     fun findEquiInOofN(): Int {
-        val array = arrayOf(-8, 3, 4, -9, 2, -5)
+        val array = arrayOf( -4, 1, 5, 2, -4, 3, 0)
         var sum = 0
         var sumFromLeft = 0
         for (i in array.indices) {
@@ -216,6 +217,15 @@ object MoreSolutions {
             digits
         }
     }
+
+    fun getGUID():String{
+        return UUID.randomUUID().toString()
+    }
+
+
+    /**
+     * exploring let
+     */
 
 //    private infix fun Int.exp(exponent: Int): Int = toDouble().pow(exponent).toInt()
 

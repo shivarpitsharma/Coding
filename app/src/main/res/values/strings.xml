@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CodingPractice</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

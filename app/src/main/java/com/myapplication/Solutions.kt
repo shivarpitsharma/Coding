@@ -1,5 +1,6 @@
 package com.myapplication
 
+import android.util.Log
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
@@ -27,6 +28,11 @@ object Solutions {
             }
         }
         return (num_result)
+    }
+
+    fun getNew(): String {
+        val s = "=";
+        return s.split('=')[0]
     }
 
     /**
@@ -535,4 +541,16 @@ object Solutions {
         return Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*", string)
     }
 
+    fun getFileName(url: String): String {
+
+        val s = url.split("?")[0]
+        val sa = s.subSequence(url.lastIndexOf("original/"), s.length)
+        val sb = sa.split("/")[1]
+        return sb
+    }
+
+
+
 }
+
+

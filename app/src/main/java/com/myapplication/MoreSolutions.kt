@@ -1,13 +1,61 @@
 package com.myapplication
 
+import android.content.Context
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
-import java.util.*
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.util.regex.Pattern
+
 
 /**
  * Created by Shivarpit
  */
+data class checkedInandOut(
+    var checkedIn: Boolean,
+    var checkout: Boolean
+)
+
 object MoreSolutions {
+
+    var list = listOf<checkedInandOut>(
+        checkedInandOut(checkedIn = true, checkout = false),
+        checkedInandOut(checkedIn = true, checkout = false)
+    )
+
+    fun printList(listdata : List<String>,country:String){
+        println(country)
+        listdata.forEachIndexed{index,string->
+            println("$string is at $index index")
+        }
+    }
+
+    fun operation(ope:String , a : Int , c :Int,d:Int, b : (x:Int,y:Int)->Int ) :Int{
+        var res = b(a,b(c,d))
+        println("doing $ope of $a $c and $d = ")
+        return res
+    }
+
+
+    private fun addition(a : Int, b : (x:Int, y:Int)->Int ):Int {
+        println("values got $a ${b.invoke(4,5)}")
+        return a.plus(b.invoke(4,5))
+    }
+
+    fun add (){
+        val add = operation("Adding",2,4,5,{x,y-> x+y })
+        println(add)
+        val mul = operation("Multiplying",2,4,5,{x,y-> x*y })
+        println(mul)
+        val sub = operation("Subtracting",2,4,5,{x,y-> x-y })
+        println(sub)
+    }
+
+
 
     /**
      * Find equilibrium index of array
@@ -16,7 +64,7 @@ object MoreSolutions {
      * in O(n)
      */
     fun findEquiInOofN(): Int {
-        val array = arrayOf( -4, 1, 5, 2, -4, 3, 0)
+        val array = arrayOf(-4, 1, 5, 2, -4, 3, 0)
         var sum = 0
         var sumFromLeft = 0
         for (i in array.indices) {
@@ -218,16 +266,206 @@ object MoreSolutions {
         }
     }
 
-    fun getGUID():String{
-        return UUID.randomUUID().toString()
+    /**
+     * Given an array arr of 4 digits, find the latest 24-hour time that can be made using each digit exactly once.
+     * 24-hour times are formatted as "HH:MM", where HH is between 00 and 23, and MM is between 00 and 59.
+     * The earliest 24-hour time is 00:00, and the latest is 23:59.
+     * Return the latest 24-hour time in "HH:MM" format.
+     * If no valid time can be made, return an empty string
+     */
+
+    fun getMaxTimeFromArray() {
+        val array = arrayOf(1, 2, 3, 4)
+
+
+    }
+
+    fun isValidVehicleNumber(number: String): Boolean {
+        return !number.isEmpty() && Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*", number)
+    }
+
+    fun checkForLetAndRun(): Boolean {
+        val kotlin = 0
+
+        kotlin?.takeIf { it == 0 }?.let { return true } ?: run { return false }
+    }
+
+    fun patternForWeb(context: Context) {
+        val url =
+            "https://www.loconav.com/web?url=https://www.loconav.com/privacypolicy&title=test custom locod&handler=chrome"
+        val url1 =
+            "https://www.loconav.com/web?url=https://www.loconav.com/privacypolicy&title=8439300002&handler=chrome"
+        var appLinkUrl = url1
+        if (!Patterns.WEB_URL.matcher(appLinkUrl).matches()) {
+            Toast.makeText(context, "Invalid URL", Toast.LENGTH_SHORT).show()
+            return
+        } else {
+            Toast.makeText(context, "valid URL", Toast.LENGTH_SHORT).show()
+
+        }
+    }
+
+    fun emailPatternMatcher(string: String): Boolean {
+        val emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$"
+
+        val passwordRegex1 = "^(?=.*[0-9])(?=.*[A-Z]).{8,}$"
+        val passwordRegex2 = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=]).{4,}$"
+//        val passwordRegex = "(/^(?=.*\\d)(?=.*[A-Z])[0-9a-zA-Z]{4,}\$/)"
+
+        val pat = Pattern.compile(passwordRegex1)
+        return pat.matcher(string).matches()
+    }
+
+    fun checkResetPasswordValidity(
+        currentPassword: String?,
+        newPassword: String,
+        confirmPassword: String
+    ): Boolean {
+        var isFieldsValid = true
+        currentPassword?.let {
+            isFieldsValid = when {
+                currentPassword.isBlank() -> {
+                    Log.i("isFieldsValid", "currentPassword isBlank")
+                    false
+                }
+                currentPassword == newPassword -> {
+                    Log.i("isFieldsValid", "currentPassword newPassword")
+                    false
+                }
+                else -> {
+                    abc(newPassword, confirmPassword)
+                }
+
+            }
+        } ?: run {
+            isFieldsValid = abc(newPassword, confirmPassword)
+        }
+        return isFieldsValid
     }
 
 
-    /**
-     * exploring let
-     */
+    fun abc(newPassword: String, confirmPassword: String): Boolean {
+        var returningBoolean = true
+        when {
+            newPassword.isBlank() -> {
+                Log.i("isFieldsValid", "newPassword isBlank")
+                returningBoolean = false
+            }
+            confirmPassword.isBlank() -> {
+                Log.i("isFieldsValid", "confirmPassword isBlank")
+                returningBoolean = false
+            }
+            newPassword != confirmPassword -> {
+                Log.i("isFieldsValid", "newPassword confirmPassword")
+                returningBoolean = false
+            }
+            emailPatternMatcher(newPassword) -> {
+                Log.i("isFieldsValid", "newPassword pattern")
+                returningBoolean = false
+            }
+        }
+        return returningBoolean
+    }
 
-//    private infix fun Int.exp(exponent: Int): Int = toDouble().pow(exponent).toInt()
+
+    fun masknumber(number: String): String {
+        return String.format(
+            "%s%s%s",
+            number.subSequence(0, 3),
+            "X".repeat(number.length - 6),
+            number.subSequence(number.length - 3, number.length)
+        )
+    }
+
+    fun abc(a: Int, bo: Int) {
+        val (data, dataValue) = if (a > 10) {
+            Pair(a - 10, bo - 10)
+        } else {
+            Pair(a + 10, bo + 10)
+        }
+        Log.i("abctesting", data.toString())
+        Log.i("abctesting", dataValue.toString())
+
+    }
+
+    fun changeStaticList(checked: Boolean) {
+        list[0].checkedIn = checked
+        list[0].checkout = true
+        for (item in list) {
+            Log.i("list", item.toString())
+        }
+    }
+
+//    fun checkletandrunreturn(a:Long?,b:Double?):String?{
+////        return b?.run {
+////            a?.let {
+////                "inside a let"
+////            }?: null
+////        }?:"inside b run"
+////
+////        b?.let {
+////            a?.let {
+////                return "inside a let"
+////            }?: return null
+////
+////        }?: return "inside b run"
+////
+////        return if(b==null) "inside b run"
+////        else {
+////            if(a == null) null
+////            else "inside a let"
+////        }
+//    }
+
+    fun checkPhoneCode(phoneNumber: String, code: String): String {
+        val phoneNumberExcluding = phoneNumber.subSequence(code.length, phoneNumber.length)
+        if (phoneNumberExcluding.length % 2 == 0) {
+            return phoneNumberExcluding.toString()
+        } else {
+            return "0$phoneNumberExcluding"
+        }
+    }
+
+
+    fun new (){
+        val a :Int=100
+        val boxedA :Int? = a
+        val anotherA:Int? = a
+
+        val b :Int=10000
+        val boxedB :Int? = b
+        val anotherB:Int? = b
+        Log.i("abctesting", "${boxedA === anotherA} ::::::: ${boxedB===anotherB}" )
+    }
+
+    fun coroutineChannels(){
+        runBlocking {
+            val table = Channel<Ball>() // a shared table
+//            table.send(Ball(0)) // serve the ball
+            launch { player("ping", table,300) }
+            launch { player("pong", table,400) }
+            table.send(Ball(0)) // serve the ball
+            delay(1000)
+            repeat(3){                //not working
+                println(table.receive())     //not working
+            }          //not working
+            coroutineContext.cancelChildren() // game over, cancel them
+        }
+    }
+
+    suspend fun player(name: String, table: Channel<Ball>,time: Long) {
+        for (ball in table) { // receive the ball in a loop
+            ball.hits++
+            println("$name $ball")
+            delay(time) // wait a bit
+            table.send(ball) // send the ball back
+        }
+    }
+
+    data class Ball(var hits: Int)
 
 
 }

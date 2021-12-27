@@ -1,8 +1,6 @@
 package com.myapplication
 
-import android.util.Log
 import java.util.*
-import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
@@ -11,7 +9,7 @@ import kotlin.math.pow
 /**
  * Created by Shivarpit
  */
-object Solutions {
+object SolutionsPartOneKotlin {
     /**
      * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
      * You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -429,6 +427,9 @@ object Solutions {
         return intArray
     }
 
+    /**
+     * Removing duplicates in the an array
+     */
     fun removeDuplicates(nums: IntArray): IntArray {
         var count = 1
         for (i in nums.indices) {
@@ -514,6 +515,9 @@ object Solutions {
         }
     }
 
+    /**
+     * private method used to return intersection for [intersection]
+     */
     private fun returnIntersection(largerArray: IntArray, smallerArray: IntArray): IntArray {
         val hashmap = HashMap<Int, Boolean>()
         val returningArray = ArrayList<Int>()
@@ -531,26 +535,6 @@ object Solutions {
 
         return returningArray.toIntArray()
     }
-
-    /**
-     * Pattern matcher for special character
-     */
-
-    fun isValidName(): Boolean {
-        val string = "UP14BD7717"
-        return Pattern.matches("^[a-zA-Z0-9]?[a-zA-Z0-9]*", string)
-    }
-
-    fun getFileName(url: String): String {
-
-        val s = url.split("?")[0]
-        val sa = s.subSequence(url.lastIndexOf("original/"), s.length)
-        val sb = sa.split("/")[1]
-        return sb
-    }
-
-
-
 }
 
 

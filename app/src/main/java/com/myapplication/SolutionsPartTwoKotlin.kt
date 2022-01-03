@@ -250,5 +250,24 @@ object SolutionsPartTwoKotlin {
     fun getMaxTimeFromArray() {
         val array = arrayOf(1, 2, 3, 4)
     }
+
+    /**
+     * Given a string s, find the length of the longest substring without repeating characters.
+     *  eg: Input: s = "abcabcbb"
+     *  Output: 3
+     *  Explanation: The answer is "abc", with the length of 3.
+     *
+     *  Input: s = "bbbbb"
+     *  Output: 1
+     *  Explanation: The answer is "b", with the length of 1.
+     */
+
+    fun lengthOfLongestSubstring(s: String): Int {
+        var maxCount = 0
+        s.forEach {
+
+        }
+        return 0
+    }
 }
 

@@ -269,5 +269,40 @@ object SolutionsPartTwoKotlin {
         }
         return 0
     }
+
+    /**
+     * Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+     *
+     */
+
+    fun containsDuplicate(nums: IntArray): Boolean {
+        val numHashMap = HashMap<Int,Int>()
+        nums.forEach {
+           if(numHashMap.containsKey(it)) return true
+            else numHashMap[it] = 1
+        }
+        return false
+    }
+
+    /**
+     * Given an array nums of size n, return the majority element.
+     * The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+     */
+
+    fun majorityElement(nums: IntArray): Int {
+        val size = nums.size
+        val numHashMap = HashMap<Int,Int>()
+        nums.forEach { num ->
+            if(numHashMap.containsKey(num)){
+                numHashMap[num]?.plus(1)
+                numHashMap[num]?.takeIf { it > size/2 }?.let {
+                    return num
+                }
+            } else {
+                numHashMap[num]?.plus(1)
+            }
+        }
+        return -1
+    }
 }
 

@@ -1,6 +1,9 @@
 package com.myapplication
 
 import android.util.Log
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.math.min
 
 
 /**
@@ -12,6 +15,9 @@ object SolutionsPartTwoKotlin {
     /**
      * private method for [performAllArithmaticOperations]
      */
+
+
+
     private fun operation(ope: String, a: Int, c: Int, d: Int, b: (x: Int, y: Int) -> Int): Int {
         val res = b(a, b(c, d))
         println("doing $ope of $a $c and $d = ")
@@ -304,5 +310,147 @@ object SolutionsPartTwoKotlin {
         }
         return -1
     }
+
+    /**
+     * Self dividing numbers :
+     * number is divided by every digit it contains, 0 should not be one
+     * Q : give all Self dividing numbers between range provided.
+     */
+
+    fun selfDividingNumbers(left: Int, right: Int): List<Int> {
+        val returningList = mutableListOf<Int>()
+        for (i in left..right) {
+            val array = i.toString()
+            var count = 0
+            for (item in array.indices) {
+                if (array[item].digitToInt() != 0) {
+                    if(i % array[item].digitToInt() == 0){
+                        count +=1
+                    }
+                }
+            }
+            if (count == array.length) {
+                returningList.add(i)
+            }
+        }
+        return returningList
+    }
+
+    // you can also use imports, for example:
+// import kotlin.math.*
+
+// you can write to stdout for debugging purposes, e.g.
+// println("this is a debug message")
+
+    fun solution(A: IntArray, B: IntArray, X: Int, Y: Int): Int {
+        val maxHieght = 1919
+        val maxWidth = 1079
+        val minHieghtWidth = 0
+        if (A.size > 100 || A.isEmpty()) return -1
+        if (X !in 0..maxHieght || Y !in 0..maxWidth) return -1
+        for (i in A.indices) {
+            if (A[i] !in minHieghtWidth..maxHieght || B[i] !in minHieghtWidth..maxWidth) return -1
+            if ((X - A[i]).times((X - A[i])) + (Y - B[i]).times((Y - B[i])) <= 400) {
+                return i
+            }
+        }
+        return -1
+    }
+
+
+    fun minCostToMoveChips(position: IntArray): Int {
+        var oddcount = 0
+        var evencount = 0
+        val n = position.size
+        for (i in position) {
+            if (i % 2 == 0) ++evencount else ++oddcount
+        }
+        return if (evencount == n || oddcount == n) 0 else min(
+            oddcount,
+            evencount
+        )
+    }
+
+    fun canConstruct(ransomNote: String, magazine: String): Boolean {
+        val hashMap = hashMapOf<Char,Int?>()
+        for (i in magazine) {
+            hashMap[i] = if (hashMap.containsKey(i)) {
+                hashMap[i]?.plus(1)
+            } else {
+                1
+            }
+        }
+
+        for(i in ransomNote) {
+            if(hashMap.containsKey(i) && hashMap[i] == 0){
+                return false
+            } else if(hashMap.containsKey(i)){
+                hashMap[i] = hashMap[i]?.minus(1)
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+
+    fun hasCycle(head: ListNode?): Boolean {
+        return true
+    }
+
+    fun solution(inputString: String): String {
+//        val hashMap = hashMapOf<Char?,Int?>()
+        val stringBuilder = StringBuilder()
+//        for(i in inputString){
+//            if(hashMap.containsKey(i)){
+//                hashMap[i]=hashMap[i]?.plus(1)
+//            } else {
+//                hashMap[i]= 1
+//            }
+//        }
+//        hashMap.keys.forEach {
+//            stringBuilder.append(hashMap[it]).append(it)
+//        }
+//        return stringBuilder.toString()
+
+        val n: Int = inputString.length
+            var i = 0
+            while (i < n) {
+                var count = 1
+                while (i < n - 1 && inputString[i] == inputString[i + 1]) {
+                    count++
+                    i++
+                }
+                stringBuilder.append(count).append(inputString[i])
+                i++
+            }
+        return stringBuilder.toString()
+    }
+
+
+    fun isPalindrome(head: ListNode?): Boolean {
+        var pointer = head
+        val stack = Stack<Int>()
+        while(pointer?.next != null){
+            if(stack.isEmpty() || pointer.`val` != stack.first()) {
+                stack.push(pointer.`val`)
+            } else {
+                stack.pop()
+            }
+            pointer = pointer.next
+        }
+        if(pointer != null && stack.isEmpty()){
+            return true
+        }
+        return false
+
+    }
+
+    fun maxProfit(prices: IntArray): Int {
+        return 0
+    }
+
+}
+class ListNode(var `val`: Int) {
+   var next: ListNode? = null
 }
 
